@@ -116,7 +116,7 @@ for (let i = 1; i < array.length - 1; i++) {
 ///////////////////////////////////////////////THIRD QUESTION/////////////////////////////////////////////
 //GETTING 2016 MATCH DATA
 // console.log(result[0][headers]);
-const MATCH_VALUES=[];
+/*const MATCH_VALUES=[];
 for(let i=0;i<result.length;i++){
     let values=result[i][headers];
     let splitValues=result[i][headers].toString().split(',');
@@ -138,7 +138,7 @@ for(let i=0;i<MATCH_ID_LIST.length;i++){
     let s=MATCH_ID_LIST[i];
     s=s.replace('\n', '');
     FILTERED_MATCH_LIST.push(s);
-}
+}*/
 // console.log(typeof FILTERED_MATCH_LIST[0]);
 // console.log(result[0][headers].toString().split(',')[1]);
 
@@ -150,12 +150,12 @@ for(let i=0;i<MATCH_ID_LIST.length;i++){
 
 /////////////////////////////////////////////////////First Question///////////////////////////////////////////////////
 //NUMBER OF MATCHES PLAYED PER YEAR
-/*const seasons=['2008','2009','2010','2011','2012','2013','2014','2015','2016','2017'];
-const matches_per_season=[];*/
+const seasons=['2008','2009','2010','2011','2012','2013','2014','2015','2016','2017'];
+const matches_per_season=[];
 // for(let i=0;i<seasons.length;i++){
 //     console.log(seasons[i]);
 // }
-/*for(let i=0;i<seasons.length;i++){
+for(let i=0;i<seasons.length;i++){
 let tempVar=seasons[i];
 let count=0;
 for(let i=0;i<result.length;i++){
@@ -170,14 +170,14 @@ matches_per_season.push(count);
 }
 for(let i=0;i<seasons.length;i++){
     console.log('year '+seasons[i]+', count : '+matches_per_season[i]);
-}*/
+}
 
 // console.log(result[0][headers].toString().split(',')[1]);
 
 ///////////////////////////////////////////////////SECOND QUESTION///////////////////////////////////////////////////
 //NUMBER OF MATCHES WON BY TEAM OVER ALL YEARS
 // console.log(result[0]);
-/*const ALL_TEAM_NAMES=[];
+const ALL_TEAM_NAMES=[];
 for(let i=0;i<result.length;i++){
     let values=result[i][headers];
     let splitValues=values.toString().split(',');
@@ -187,14 +187,14 @@ for(let i=0;i<result.length;i++){
 let UNIQUE_TEAM_NAMES=[];
 UNIQUE_TEAM_NAMES= ALL_TEAM_NAMES.filter(function(team,index){
 return ALL_TEAM_NAMES.indexOf(team)===index;
-})*/
+})
 
 // console.log(UNIQUE_TEAM_NAMES);
 // const TEAMS=result
 
 //counting the victories by each team
 
-/*const TOTAL_WINS=[];
+const TOTAL_WINS=[];
 for(let i=0;i<UNIQUE_TEAM_NAMES.length;i++){
 let count_team=UNIQUE_TEAM_NAMES[i];
 let count=0;
@@ -214,7 +214,7 @@ if(TOTAL_WINS.length===UNIQUE_TEAM_NAMES.length){
 for(let i=0;i<UNIQUE_TEAM_NAMES.length;i++){
     console.log('Wins by '+UNIQUE_TEAM_NAMES[i]+' : '+TOTAL_WINS[i]);
 }
-*/
+
 
 ///////////////////////////////////////////////THIRD QUESTION/////////////////////////////////////////////////////////
 
@@ -240,7 +240,7 @@ for(let i=0;i<UNIQUE_TEAM_NAMES.length;i++){
 ///////////////////////////////////////////////FIFTH QUESTION///////////////////////////////////////////////////////
 
 //PLAYER WITH MOST MAN OF THE MATCH WINS ALL TIME(2008-17)
-/*const MOTM_List=[];
+const MOTM_List=[];
 for(let i=0;i<result.length;i++){
     let values=result[i][headers];
     let splitValues=values.toString().split(',');
@@ -249,9 +249,9 @@ for(let i=0;i<result.length;i++){
 }
 MOTM_Winners=MOTM_List.filter(function(winner,index){
 return MOTM_List.indexOf(winner)===index;
-})*/
+})
 // console.log(MOTM_Winners);
-/*const MOTM_Counts=[];
+const MOTM_Counts=[];
 for(let i=0;i<MOTM_Winners.length;i++){
     let count=0;
     for(let j=0;j<MOTM_List.length;j++){
@@ -260,9 +260,9 @@ for(let i=0;i<MOTM_Winners.length;i++){
         }
     }
     MOTM_Counts.push(count);
-}*/
+}
 // console.log(MOTM_Counts);
-/*let maxAwarded=0;
+let maxAwarded=0;
 let maxIndex=-1;
 for(let i=0;i<MOTM_Counts.length;i++){
 if(MOTM_Counts[i]>maxAwarded){
@@ -270,4 +270,4 @@ if(MOTM_Counts[i]>maxAwarded){
     maxIndex=i;
 }
 }
-console.log(MOTM_Winners[maxIndex]+' : '+MOTM_Counts[maxIndex]);*/
+console.log(MOTM_Winners[maxIndex]+' : '+MOTM_Counts[maxIndex]);
