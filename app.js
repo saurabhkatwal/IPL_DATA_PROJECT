@@ -1,31 +1,75 @@
+const { FORMERR } = require("dns");
 const fs = require("fs");
 csv = fs.readFileSync("matches.csv");
 var array = csv.toString().split("\r");
+const fs2=require("fs");
+csv2=fs.readFileSync("deliveries.csv");
+var array2=csv2.toString().split("\r");
+////////////////////////////////////////deliveries.csv file conversion/////////////////////////////////////
+let result2 = [];
+ 
 
+let headers2 = array2[0].split(", ")
+ 
+
+for (let i = 1; i < array2.length - 1; i++) {
+  let obj2 = {}
+ 
+ 
+  let str2 = array2[i]
+  let s2 = ''
+ 
+  
+  let flag2 = 0
+  for (let ch2 of str2) {
+    if (ch2 === '"' && flag2 === 0) {
+      flag2 = 1
+    }
+    else if (ch2 === '"' && flag2 == 1) flag2 = 0
+    if (ch2 === ', ' && flag2 === 0) ch2 = '|'
+    if (ch2 !== '"') s2 += ch2
+  }
+ 
+  
+  let properties2 = s2.split("|")
+ 
+ 
+  for (let j2 in headers2) {
+    if (properties2[j2].includes(", ")) {
+      obj2[headers2[j2]] = properties2[j2]
+        .split(", ").map(item2 => item2.trim())
+    }
+    else obj2[headers2[j2]] = properties2[j2]
+  }
+ 
+  
+  result2.push(obj2)
+}
+ 
+
+let json2 = JSON.stringify(result2);
+fs.writeFileSync('output2.json', json2);
+
+// console.log(result2[0][headers2]);
+let values2=[];
+for(let i=1;i<result2.length;i++){
+    let valueString2=result2[i][headers2];
+    values2.push(valueString2);
+}
+// console.log(values2);
+
+//////////////////////////////////////////matches.csv file conversion //////////////////////////////////////////////
 // console.log(array);
 let result=[];
 let headers=array[0].split(', ');
 for (let i = 1; i < array.length - 1; i++) {
     let obj = {}
    
-    // Create an empty object to later add
-    // values of the current row to it
-    // Declare string str as current array
-    // value to change the delimiter and
-    // store the generated string in a new
-    // string s
+    
     let str = array[i]
     let s = ''
    
-    // By Default, we get the comma separated
-    // values of a cell in quotes " " so we
-    // use flag to keep track of quotes and
-    // split the string accordingly
-    // If we encounter opening quote (")
-    // then we keep commas as it is otherwise
-    // we replace them with pipe |
-    // We keep adding the characters we
-    // traverse to a String s
+    
     let flag = 0
     for (let ch of str) {
       if (ch === '"' && flag === 0) {
@@ -36,14 +80,10 @@ for (let i = 1; i < array.length - 1; i++) {
       if (ch !== '"') s += ch
     }
    
-    // Split the string using pipe delimiter |
-    // and store the values in a properties array
+    
     let properties = s.split("|")
    
-    // For each header, if the value contains
-    // multiple comma separated data, then we
-    // store it in the form of array otherwise
-    // directly the value is stored
+    
     for (let j in headers) {
       if (properties[j].includes(", ")) {
         obj[headers[j]] = properties[j]
@@ -52,13 +92,11 @@ for (let i = 1; i < array.length - 1; i++) {
       else obj[headers[j]] = properties[j]
     }
    
-    // Add the generated object to our
-    // result array
-    result.push(obj)
+    
+   result.push(obj)
   }
 //    console.log(result);
-  // Convert the resultant array to json and
-  // generate the JSON output file.
+  
   let json = JSON.stringify(result);
   let objMain=JSON.parse(json);
 //   console.log(objMain[0][headers]);
@@ -71,6 +109,43 @@ for (let i = 1; i < array.length - 1; i++) {
 // let temp="hello\nt\rhere";
 // temp=temp.split('\r');
 // console.log(temp);
+
+
+
+
+///////////////////////////////////////////////THIRD QUESTION/////////////////////////////////////////////
+//GETTING 2016 MATCH DATA
+// console.log(result[0][headers]);
+const MATCH_VALUES=[];
+for(let i=0;i<result.length;i++){
+    let values=result[i][headers];
+    let splitValues=result[i][headers].toString().split(',');
+    if(splitValues[1]==='2016'){
+    MATCH_VALUES.push(splitValues);
+    }
+}
+// console.log(MATCH_VALUES.length);
+// console.log(MATCH_VALUES[0][0]); //2016 DATA
+//GETTING MATCH_ID LIST FROM 2016
+let MATCH_ID_LIST=[];
+for(let i=0;i<MATCH_VALUES.length;i++){
+MATCH_ID_LIST.push(MATCH_VALUES[i][0]);
+}
+// console.log(MATCH_ID_LIST);
+//REMOVING NEWLINE CHARACTERS FROM THE STRINGS
+const FILTERED_MATCH_LIST=[];
+for(let i=0;i<MATCH_ID_LIST.length;i++){
+    let s=MATCH_ID_LIST[i];
+    s=s.replace('\n', '');
+    FILTERED_MATCH_LIST.push(s);
+}
+// console.log(typeof FILTERED_MATCH_LIST[0]);
+// console.log(result[0][headers].toString().split(',')[1]);
+
+
+
+
+
 
 
 /////////////////////////////////////////////////////First Question///////////////////////////////////////////////////
@@ -165,7 +240,7 @@ for(let i=0;i<UNIQUE_TEAM_NAMES.length;i++){
 ///////////////////////////////////////////////FIFTH QUESTION///////////////////////////////////////////////////////
 
 //PLAYER WITH MOST MAN OF THE MATCH WINS ALL TIME(2008-17)
-const MOTM_List=[];
+/*const MOTM_List=[];
 for(let i=0;i<result.length;i++){
     let values=result[i][headers];
     let splitValues=values.toString().split(',');
@@ -174,9 +249,9 @@ for(let i=0;i<result.length;i++){
 }
 MOTM_Winners=MOTM_List.filter(function(winner,index){
 return MOTM_List.indexOf(winner)===index;
-})
+})*/
 // console.log(MOTM_Winners);
-const MOTM_Counts=[];
+/*const MOTM_Counts=[];
 for(let i=0;i<MOTM_Winners.length;i++){
     let count=0;
     for(let j=0;j<MOTM_List.length;j++){
@@ -185,9 +260,9 @@ for(let i=0;i<MOTM_Winners.length;i++){
         }
     }
     MOTM_Counts.push(count);
-}
+}*/
 // console.log(MOTM_Counts);
-let maxAwarded=0;
+/*let maxAwarded=0;
 let maxIndex=-1;
 for(let i=0;i<MOTM_Counts.length;i++){
 if(MOTM_Counts[i]>maxAwarded){
@@ -195,4 +270,4 @@ if(MOTM_Counts[i]>maxAwarded){
     maxIndex=i;
 }
 }
-console.log(MOTM_Winners[maxIndex]+' : '+MOTM_Counts[maxIndex]);
+console.log(MOTM_Winners[maxIndex]+' : '+MOTM_Counts[maxIndex]);*/
