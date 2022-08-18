@@ -168,6 +168,9 @@ if(year===tempVar){
 }
 matches_per_season.push(count);
 }
+console.log('***************************************************************************');
+console.log('TOTAL NUMBER OF MATCHES PLAYED PER YEAR');
+console.log('***************************************************************************');
 for(let i=0;i<seasons.length;i++){
     console.log('year '+seasons[i]+', count : '+matches_per_season[i]);
 }
@@ -208,9 +211,12 @@ for(let j=0;j<result.length;j++){
 }
 TOTAL_WINS.push(count);
 }
-if(TOTAL_WINS.length===UNIQUE_TEAM_NAMES.length){
-    console.log("yes");
-}
+// if(TOTAL_WINS.length===UNIQUE_TEAM_NAMES.length){
+//     console.log("yes");
+// }
+console.log('****************************************************************************************');
+console.log('NUMBER OF MATCHES WON BY A TEAM OVER ALL YEARS IN IPL');
+console.log('****************************************************************************************');
 for(let i=0;i<UNIQUE_TEAM_NAMES.length;i++){
     console.log('Wins by '+UNIQUE_TEAM_NAMES[i]+' : '+TOTAL_WINS[i]);
 }
@@ -270,4 +276,7 @@ if(MOTM_Counts[i]>maxAwarded){
     maxIndex=i;
 }
 }
+console.log('***********************************************************************************');
+console.log('MOST MAN OF THE MATCH AWARDS WON BY A PLAYER THROUGHOUT ALL SEASONS OF IPL');
+console.log('***********************************************************************************');
 console.log(MOTM_Winners[maxIndex]+' : '+MOTM_Counts[maxIndex]);
